@@ -12,7 +12,7 @@ class TypeUser extends Model
     use SoftDeletes;
 
     //declare table
-    public $table = 'specialist';
+    public $table = 'type_user';
 
 
     // this fiels must type date yyyy-mm-dd hh:mm:ss
@@ -30,4 +30,12 @@ class TypeUser extends Model
         'updated_at',
         'delete_at',
     ];
+//one to msny
+public function detail_user() {
+    // 2 parameter (path model, field foreign key)
+    return $this->hasMany('App\Models\ManagementAccess\DetailUser','type_user_id');
+
+}
+
+
 }
