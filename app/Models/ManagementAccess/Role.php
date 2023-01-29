@@ -29,4 +29,14 @@ class Role extends Model
         'updated_at',
         'delete_at',
     ];
+//one to msny
+    public function role_user() {
+    // 2 parameter (path model, field foreign key)
+    return $this->hasMany('App\Models\ManagementAccess\RoleUser','role_id');
+}
+//one to msny
+    public function permission_role() {
+    // 2 parameter (path model, field foreign key)
+    return $this->hasMany('App\Models\ManagementAccess\PermissionRole','role_id');
+}
 }
