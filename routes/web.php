@@ -25,8 +25,7 @@ Route::resource('/', LandingController::class);
 //     return view('welcome');
 // });
 
-Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum',
-'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum','verified']], function () {
     // return view ('dashboard');
 
     //  appointment page routes
@@ -37,6 +36,12 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
 
 
+});
+
+
+Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum',
+'verified']], function () {
+    return view ('dashboard');
 });
 
 // Route::middleware([
