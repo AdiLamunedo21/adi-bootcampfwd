@@ -26,7 +26,6 @@ Route::resource('/', LandingController::class);
 // });
 
 Route::group(['middleware' => ['auth:sanctum','verified']], function () {
-    // return view ('dashboard');
 
     //  appointment page routes
     Route::get('branch/filter', [AppointmentController::class, 'filter'] )->name('branch.filter');
@@ -34,14 +33,14 @@ Route::group(['middleware' => ['auth:sanctum','verified']], function () {
     // payment page routes
     Route::resource('payment', PaymentController::class);
 
-
-
 });
 
 
 Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum',
 'verified']], function () {
+
     return view ('dashboard');
+
 });
 
 // Route::middleware([
