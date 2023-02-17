@@ -13,12 +13,7 @@
     </head>
     <body>
 
-
-
-        @include('components.frontsite.header')
-            @yield('content')
-
-        @include('components.frontsite.footer')
+        @yield('content')
 
         @stack('before-script')
             @include('includes.frontsite.script')
