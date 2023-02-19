@@ -10,6 +10,8 @@ use App\Models\Operational\Appointment;
 
 //backsite
 use App\Http\Controllers\Backsite\DashboardController;
+use App\Http\Controllers\Backsite\SpecialistController;
+use App\Http\Controllers\Backsite\TypeUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,11 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
     //return view ('dashboard');
     Route::resource('dashboard', DashboardController::class);
 
+        // type user
+    Route::resource('type_user', TypeUserController::class);
+
+    // specialits
+    Route::resource('specialist', SpecialistController::class);
 });
 
 // Route::middleware([
