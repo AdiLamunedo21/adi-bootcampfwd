@@ -3,16 +3,24 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 // use library here
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+
+// request
+use App\Http\Requests\ConfigPayment\UpdateConfigPaymentRequest;
 
 // use everything here
 use Gate;
 use Auth;
 
-class DashboardController extends Controller
+// use model here
+use App\Models\MasterData\ConfigPayment;
+
+// thirdparty package
+
+class ConfigPaymentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -31,9 +39,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('dashboard_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('config_payment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('pages.backsite.dashboard.index');
+        $config_payment = ConfigPayment::all();
+
+        return view('pages.backsite.master-data.config-payment.index', compact('config_payment'));
     }
 
     /**
@@ -43,7 +53,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        return abort();
+        return abort(404);
     }
 
     /**
@@ -54,7 +64,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        return abort();
+        return abort(404);
     }
 
     /**
@@ -65,7 +75,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        return abort();
+        return abort(404);
     }
 
     /**
@@ -74,9 +84,11 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ConfigPayment $config_payment)
     {
-        return abort();
+        abort_if(Gate::denies('config_payment_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('pages.backsite.master-data.config-payment.edit', compact('config_payment'));
     }
 
     /**
@@ -86,9 +98,21 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateConfigPaymentRequest $request, ConfigPayment $config_payment)
     {
-        return abort();
+        // get all request from frontsite
+        $data = $request->all();
+
+        // re format before push to table
+        $data['fee'] = str_replace(',', '', $data['fee']);
+        $data['fee'] = str_replace('IDR ', '', $data['fee']);
+        $data['vat'] = str_replace(',', '', $data['vat']);
+
+        // update to database
+        $config_payment->update($data);
+
+        alert()->success('Success Message', 'Successfully updated config payment');
+        return redirect()->route('backsite.config_payment.index');
     }
 
     /**
@@ -99,6 +123,6 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        return abort();
+        return abort(404);
     }
 }
