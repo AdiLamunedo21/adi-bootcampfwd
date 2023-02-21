@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\MasterData\Consultation;
 
 use Illuminate\Database\Seeder;
-use illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class ConsultationSeeder extends Seeder
 {
@@ -16,25 +16,26 @@ class ConsultationSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // create data here
         $consultation = [
             [
                 'name' => 'Jantung Sesak',
-                'created_at' => date('y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'Tekanan Darah Tinggi',
-                'created_at' => date('y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'Gangguan Irama Jantung',
-                'created_at' => date('y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
         ];
 
+        // this array $consultation will be insert to table 'consultation'
         Consultation::insert($consultation);
     }
 }

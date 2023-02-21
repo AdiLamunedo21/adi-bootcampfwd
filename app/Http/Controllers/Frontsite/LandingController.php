@@ -7,38 +7,21 @@ use App\Http\Controllers\Controller;
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
-use Facade\FlareClient\View;
-use Illuminate\Contracts\View\View as ViewView;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-
-// user everything
-// use gate
+// use everything here
+// use Gate;
 use Auth;
 
-
-//  Model here
+// use model here
 use App\Models\User;
 use App\Models\Operational\Doctor;
 use App\Models\MasterData\Specialist;
 
-
-// third party packages
-
+// thirdparty package
 
 class LandingController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +29,10 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return View('pages.frontsite.landing-page.index');
+        $specialist = Specialist::orderBy('name', 'desc')->limit(5)->get();
+        $doctor = Doctor::orderBy('created_at', 'desc')->limit(4)->get();
+
+        return view('pages.frontsite.landing-page.index', compact('doctor', 'specialist'));
     }
 
     /**
@@ -115,7 +101,5 @@ class LandingController extends Controller
         return abort(404);
     }
 
-
-
-
+    // custom function here
 }
