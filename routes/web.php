@@ -40,13 +40,19 @@ Route::resource('/', LandingController::class);
 //     return view('welcome');
 // });
 
-Route::group(['middleware' => ['auth:sanctum','verified']], function () {
+Route::resource('/', LandingController::class);
 
-    //  appointment page routes
-    Route::get('branch/filter', [AppointmentController::class, 'filter'] )->name('branch.filter');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+
+    // appointment page
+    Route::get('appointment/doctor/{id}', [AppointmentController::class, 'appointment'])->name('appointment.doctor');
     Route::resource('appointment', AppointmentController::class);
-    // payment page routes
+
+    // payment page
+    Route::get('payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('payment/appointment/{id}', [PaymentController::class, 'payment'])->name('payment.appointment');
     Route::resource('payment', PaymentController::class);
+
     Route::resource('register_success', RegisterController::class);
 });
 

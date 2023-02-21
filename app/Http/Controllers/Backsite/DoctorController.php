@@ -15,7 +15,7 @@ use App\Http\Requests\Doctor\StoreDoctorRequest;
 use App\Http\Requests\Doctor\UpdateDoctorRequest;
 
 // use everything here
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Auth;
 use File;
 
