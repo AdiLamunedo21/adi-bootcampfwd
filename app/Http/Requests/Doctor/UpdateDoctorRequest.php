@@ -2,12 +2,10 @@
 
 namespace App\Http\Requests\Doctor;
 
-// Use gate
+use App\Models\Operational\Doctor;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Component\HttpFoundation\Response;
-
-// this rule only at update request
-use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateDoctorRequest extends FormRequest
 {
@@ -18,6 +16,8 @@ class UpdateDoctorRequest extends FormRequest
      */
     public function authorize()
     {
+        abort_if(Gate::denies('doctor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return true;
     }
 
@@ -32,17 +32,14 @@ class UpdateDoctorRequest extends FormRequest
             'specialist_id' => [
                 'required', 'integer',
             ],
-
             'name' => [
                 'required', 'string', 'max:255',
             ],
-
             'fee' => [
                 'required', 'string', 'max:255',
             ],
-
             'photo' => [
-                'nullable', 'string', 'max:10000',
+                'nullable', 'mimes:jpeg,svg,png', 'max:10000',
             ],
         ];
     }

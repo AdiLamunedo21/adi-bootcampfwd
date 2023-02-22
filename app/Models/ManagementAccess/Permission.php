@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends Model
 {
-   //use hasFactory;
+    // use HasFactory;
     use SoftDeletes;
 
-    //declare table
+    // declare table
     public $table = 'permission';
 
-
-    // this fiels must type date yyyy-mm-dd hh:mm:ss
+    // this field must type date yyyy-mm-dd hh:mm:ss
     protected $dates = [
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 
     // declare fillable
@@ -27,12 +26,19 @@ class Permission extends Model
         'title',
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
-//one to msny
-    public function permission_role() {
-    // 2 parameter (path model, field foreign key)
-    return $this->hasMany('App\Models\ManagementAccess\PermissionRole','permission_id');
-}
 
+    // many to many
+    public function role()
+    {
+        return $this->belongsToMany('App\Models\ManagementAccess\Role');
+    }
+
+    // one to many
+    public function permission_role()
+    {
+        // 2 parameter (path model, field foreign key)
+        return $this->hasMany('App\Models\ManagementAccess\PermissionRole', 'permission_id');
+    }
 }

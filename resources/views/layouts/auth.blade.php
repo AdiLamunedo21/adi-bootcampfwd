@@ -4,7 +4,7 @@
 
         @include('includes.frontsite.meta')
 
-        <title>@yield('title') | Meet-Doctor</title>
+        <title>@yield('title') | MeetDoctor</title>
 
         @stack('before-style')
             @include('includes.frontsite.style')
@@ -12,7 +12,9 @@
 
     </head>
     <body>
+
         @include('sweetalert::alert')
+
         @yield('content')
 
         @stack('before-script')

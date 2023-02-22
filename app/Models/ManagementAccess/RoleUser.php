@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RoleUser extends Model
 {
-    //use hasFactory;
+    // use HasFactory;
     use SoftDeletes;
 
-    //declare table
+    // declare table
     public $table = 'role_user';
 
-
-    // this fiels must type date yyyy-mm-dd hh:mm:ss
+    // this field must type date yyyy-mm-dd hh:mm:ss
     protected $dates = [
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 
     // declare fillable
@@ -28,20 +27,19 @@ class RoleUser extends Model
         'user_id',
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 
-    //one to msny
-    public function user() {
-    // 3 parameter (path model, field foreign key, field primary key from table has many/hasOne)
-    return $this->belongsTo('App\Models\User','user_id', 'id');
+    // one to many
+    public function user()
+    {
+        // 3 parameter (path model, field foreign key, field primary key from table hasMany/hasOne)
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 
-}
-
- //one to msny
-    public function role() {
-    // 3 parameter (path model, field foreign key, field primary key from table has many/hasOne)
-    return $this->belongsTo('App\Models\ManagementAccess\Role','role_id', 'id');
-
-}
+    public function role()
+    {
+        // 3 parameter (path model, field foreign key, field primary key from table hasMany/hasOne)
+        return $this->belongsTo('App\Models\ManagementAccess\Role', 'role_id', 'id');
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Doctor;
 
 use App\Models\Operational\Doctor;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 

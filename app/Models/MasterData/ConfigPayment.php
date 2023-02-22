@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ConfigPayment extends Model
 {
-   //use hasFactory;
+    // use HasFactory;
     use SoftDeletes;
 
-    //declare table
+    // declare table
     public $table = 'config_payment';
 
-
-    // this fiels must type date yyyy-mm-dd hh:mm:ss
+    // this field must type date yyyy-mm-dd hh:mm:ss
     protected $dates = [
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 
     // declare fillable
@@ -28,6 +27,6 @@ class ConfigPayment extends Model
         'vat',
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 }

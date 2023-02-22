@@ -6,27 +6,26 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
-    use HasFactory;
+    // use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
-    //use TwoFactorAuthenticatable;
+    use TwoFactorAuthenticatable;
+
     use SoftDeletes;
 
     protected $dates = [
-        'created_at',
         'updated_at',
-        'delete_at',
+        'created_at',
+        'deleted_at',
         'email_verified_at',
-
     ];
 
     /**
@@ -70,22 +69,28 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    //one to msny
-    public function appointment() {
-    // 2 parameter (path model, field foreign key)
-    return $this->hasMany('App\Models\Operational\Appointment','user_id');
-}
+    // many to many --- //
+    public function role()
+    {
+        return $this->belongsToMany('App\Models\ManagementAccess\Role');
+    }
 
-//one to msny
-    public function detail_user() {
-    // 2 parameter (path model, field foreign key)
-    return $this->hasOne('App\Models\ManagementAceess\DetailUser','user_id');
-}
+    // one to many
+    public function appointment()
+    {
+        // 2 parameter (path model, field foreign key)
+        return $this->hasMany('App\Models\Operational\Appointment', 'user_id');
+    }
 
-    //one to msny
-    public function role_user() {
-    // 2 parameter (path model, field foreign key)
-    return $this->hasMany('App\Models\ManagementAccess\RoleUser','user_id');
-}
+    public function detail_user()
+    {
+        // 2 parameter (path model, field foreign key)
+        return $this->hasOne('App\Models\ManagementAccess\DetailUser', 'user_id');
+    }
 
+    public function role_user()
+    {
+        // 2 parameter (path model, field foreign key)
+        return $this->hasMany('App\Models\ManagementAccess\RoleUser', 'user_id');
+    }
 }

@@ -1,4 +1,3 @@
-
 <!-- BEGIN: Vendor JS-->
 <script src="{{ asset('/assets/backsite/app-assets/vendors/js/vendors.min.js') }}"></script>
 <!-- BEGIN Vendor JS-->

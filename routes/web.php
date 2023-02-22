@@ -8,7 +8,7 @@ use App\Http\Controllers\Frontsite\AppointmentController;
 use App\Http\Controllers\Frontsite\PaymentController;
 use App\Http\Controllers\Frontsite\RegisterController;
 
-//backsite
+// backsite
 use App\Http\Controllers\Backsite\DashboardController;
 use App\Http\Controllers\Backsite\PermissionController;
 use App\Http\Controllers\Backsite\RoleController;
@@ -35,13 +35,6 @@ use App\Http\Controllers\Backsite\ReportTransactionController;
 
 Route::resource('/', LandingController::class);
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::resource('/', LandingController::class);
-
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     // appointment page
@@ -56,9 +49,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::resource('register_success', RegisterController::class);
 });
 
-
-Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum',
-'verified']], function () {
+Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['auth:sanctum', 'verified']], function () {
 
     // dashboard
     Route::resource('dashboard', DashboardController::class);
@@ -95,15 +86,13 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // report transaction
     Route::resource('transaction', ReportTransactionController::class);
+
 });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');

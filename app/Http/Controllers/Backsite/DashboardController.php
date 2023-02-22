@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 // use everything here
-
 use Gate;
 use Auth;
 

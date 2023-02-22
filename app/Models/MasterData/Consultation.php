@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Consultation extends Model
 {
-    //use hasFactory;
+    // use HasFactory;
     use SoftDeletes;
 
-    //declare table
+    // declare table
     public $table = 'consultation';
 
-
-    // this fiels must type date yyyy-mm-dd hh:mm:ss
+    // this field must type date yyyy-mm-dd hh:mm:ss
     protected $dates = [
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
 
     // declare fillable
@@ -27,13 +26,13 @@ class Consultation extends Model
         'name',
         'created_at',
         'updated_at',
-        'delete_at',
+        'deleted_at',
     ];
-    //one to msny
-    public function appointment() {
-    // 2 parameter (path model, field foreign key)
-    return $this->hasMany('App\Models\Operational\Appointment','consultation_id');
 
-}
-
+    // one to many
+    public function appointment()
+    {
+        // 3 parameter (path model, field foreign key)
+        return $this->hasMany('App\Models\Operational\Appointment', 'consultation_id');
+    }
 }

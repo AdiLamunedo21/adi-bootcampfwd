@@ -14,9 +14,9 @@ class AddForeignKeysToDoctorTable extends Migration
     public function up()
     {
         Schema::table('doctor', function (Blueprint $table) {
-        $table->foreign('specialist_id', 'fk_doctor_to_specialist')
-            ->references('id')->on('specialist')->onUpdate('CASCADE')
-            ->onDelete('CASCADE');
+            $table->foreign('specialist_id', 'fk_doctor_to_specialist')
+            ->references('id')->on('specialist')
+            ->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
